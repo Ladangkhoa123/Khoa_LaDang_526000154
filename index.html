@@ -5,7 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="GameHub — khám phá game mới, game bán chạy và những ưu đãi hấp dẫn dành cho game thủ.">
   <title>GameHub — Thế giới game của bạn</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
   <link rel="stylesheet" href="style.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Bỏ qua điều hướng</a>
@@ -39,7 +42,7 @@
       <div class="hero-content">
         <p class="eyebrow"><span class="eyebrow-line"></span> TÂM ĐIỂM TUẦN NÀY</p>
         <p class="hero-kicker">GAMEHUB ORIGINALS <span>•</span> 2025</p>
-        <h1 id="hero-title">ECLIPSE<br><span>PROTOCOL</span></h1>
+        <h1 id="hero-title" class="animate__animated animate__fadeInUp">ECLIPSE<br><span>PROTOCOL</span></h1>
         <p class="hero-description">Khi ranh giới giữa con người và cỗ máy tan biến, lựa chọn của bạn sẽ viết lại tương lai.</p>
         <div class="hero-meta">
           <span class="rating-badge">★★★★★ <b>9.2</b></span>
@@ -225,5 +228,42 @@
     </div>
     <div class="page-shell footer-bottom"><p>© 2025 GameHub. Tất cả quyền được bảo lưu.</p><p>Thiết kế dành cho game thủ <span aria-hidden="true">✦</span></p></div>
   </footer>
+  <script>
+    const initializeScrollAnimations = () => {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !window.AOS) {
+        return;
+      }
+
+      const addScrollAnimation = (selector, animation, stagger = 0) => {
+        document.querySelectorAll(selector).forEach((element, index) => {
+          element.dataset.aos = animation;
+          if (stagger) {
+            element.dataset.aosDelay = String((index % 4) * stagger);
+          }
+        });
+      };
+
+      addScrollAnimation(".genre-section .section-heading, #featured .section-heading", "fade-right");
+      addScrollAnimation(".genre-tile", "zoom-in", 70);
+      addScrollAnimation(".game-card", "fade-up", 70);
+      addScrollAnimation(".deal-banner", "fade-up");
+      addScrollAnimation(".seller-item", "fade-right", 90);
+      addScrollAnimation(".new-release-card", "fade-left");
+      addScrollAnimation(".newsletter", "zoom-in");
+
+      window.AOS.init({
+        duration: 650,
+        easing: "ease-out-cubic",
+        once: true,
+        offset: 70
+      });
+    };
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initializeScrollAnimations, { once: true });
+    } else {
+      initializeScrollAnimations();
+    }
+  </script>
 </body>
 </html>
